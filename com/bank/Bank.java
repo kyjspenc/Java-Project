@@ -7,7 +7,7 @@ import java.util.Scanner;
 import com.bank.accounts.*;
 import com.bank.customer.*;
 import com.bank.utils.UniqueIDFactory;
-
+//marcelo did this
 public class Bank {
 	Scanner userInput = new Scanner(System.in);
 	String input = "";
@@ -22,7 +22,7 @@ public class Bank {
 		Bank b = new Bank();
 		b.start();
 	}
-	
+
 	public void start() {
 			
 		do {
