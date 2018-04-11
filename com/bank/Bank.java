@@ -44,7 +44,7 @@ public class Bank {
 				case "12": System.out.println("You have chosen to exit the application. \n\nThank you for choosing Bank Co to service your banking needs!"); break;
 				default: System.out.println("....You have entered an invalid menu option....Please select a valid menu option\n");
 			}
-		}while (!input.equals("11"));
+		}while (!input.equals("12"));
 	}
 	/**
 	 * Display the menu of options for the teller
@@ -348,7 +348,6 @@ public class Bank {
 			}
 		}
 			return accountFound;
-		
 	}
 	
 	/*
