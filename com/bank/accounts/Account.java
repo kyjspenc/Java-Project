@@ -3,8 +3,9 @@ package com.bank.accounts;
 import java.util.Date;
 
 import com.bank.customer.Customer;
+import java.io.Serializable;
 
-public abstract class Account {
+public abstract class Account implements Serializable {
 	protected long accountNumber;
 	protected double accountBalance;
 	protected Customer customer;

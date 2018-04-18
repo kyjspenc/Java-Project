@@ -4,8 +4,8 @@
  * A specialized customer representing a personal
  * customer
  *
- * @author AMA
- * @version 1.0
+ * @author MM
+ * @version 1.5
 */
 package com.bank.customer;
 

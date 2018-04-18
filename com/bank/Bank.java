@@ -1,14 +1,23 @@
 package com.bank;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import com.bank.accounts.*;
 import com.bank.customer.*;
 import com.bank.utils.UniqueIDFactory;
-//marcelo did this
-public class Bank {
+
+public class Bank implements Serializable {
 	Scanner userInput = new Scanner(System.in);
 	String input = "";
 	String customerInput = "";
@@ -17,14 +26,16 @@ public class Bank {
 	ArrayList<Account> accountArray = new ArrayList<Account>();
 	ArrayList<Customer> customerArray = new ArrayList<Customer>();
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		
 		Bank b = new Bank();
 		b.start();
 	}
 
-	public void start() {
+	public void start() throws ClassNotFoundException {
 			
+		openFileForReading();
+		
 		do {
 			displayMenu();
 			System.out.print("Please select an option: ");
@@ -41,7 +52,7 @@ public class Bank {
 				case "9": System.out.println("You have chosen to apply account updates "); applyAccountUpdates(); break;
 				case "10": System.out.println("You have chosen to display Bank statistics "); displayBankStatistics(); break;
 				case "11": System.out.println("You have chosen to display all accounts."); displayAllAccounts(); break;
-				case "12": System.out.println("You have chosen to exit the application. \n\nThank you for choosing Bank Co to service your banking needs!"); break;
+				case "12": System.out.println("You have chosen to exit the application. \n\nThank you for choosing Bank Co to service your banking needs!"); exit(); break;
 				default: System.out.println("....You have entered an invalid menu option....Please select a valid menu option\n");
 			}
 		}while (!input.equals("12"));
@@ -544,5 +555,43 @@ public class Bank {
 			System.out.print("\nPress 'c' to continue: ");
 			input = userInput.next();
 		}
+	}
+	/**
+	 * 
+	 *
+	 */
+	public void exit() {// throws exception every time
+		
+		File f = new File("bankdata.dat");
+		try {
+			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(f));
+			output.writeObject(accountArray);
+			System.out.println("Saved");
+		} catch (IOException ioException) {
+			System.err.println("Error opening file.");
+			System.out.println();
+		}
+		
+	}
+	
+	/**
+	 * @throws ClassNotFoundException 
+	 * 
+	 */
+	public void openFileForReading() throws ClassNotFoundException {
+		
+		File f = new File("bankdata.dat");
+		if(f.exists()) {
+
+			try {
+				ObjectInputStream input = new ObjectInputStream(new FileInputStream(f));
+
+				accountArray = (ArrayList<Account>) input.readObject();
+	
+			} catch(IOException ioException) {
+				System.err.println("Error opening file.");
+				System.out.println();
+			}
+	}
 	}
 }

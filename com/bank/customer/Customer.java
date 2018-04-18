@@ -7,10 +7,12 @@
  * to force future functionality to be implemented
  * by different customer types, abstract will allow for this.
  *
- * @author AMA
- * @version 1.0
+ * @author JIB
+ * @version 1.1
 */
 package com.bank.customer;
+
+import java.io.Serializable;
 
 public abstract class Customer {
 

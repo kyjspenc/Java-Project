@@ -3,8 +3,8 @@
  * 
  * A specialized customer representing a commercial customer
  *
- * @author AMA
- * @version 1.0
+ * @author KS
+ * @version 1.2
 */
 package com.bank.customer;
 
