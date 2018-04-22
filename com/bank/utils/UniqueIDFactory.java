@@ -8,9 +8,10 @@
  */
 package com.bank.utils;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class UniqueIDFactory {
+public class UniqueIDFactory implements Serializable {
 
      /*
      * Returns a unique long number

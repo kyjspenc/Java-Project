@@ -14,7 +14,7 @@ package com.bank.customer;
 
 import java.io.Serializable;
 
-public abstract class Customer {
+public abstract class Customer implements Serializable {
 
     protected long customerId;
     protected String name;

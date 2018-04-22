@@ -11,7 +11,10 @@ package com.bank.customer;
 
 public class PersonalCustomer extends Customer{
 	
-    private String homePhone;
+    /**
+	 * 
+	 */
+	private String homePhone;
     private String workPhone;
     
      /**

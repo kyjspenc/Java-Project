@@ -99,22 +99,26 @@ public class Bank implements Serializable {
 			String customerWorkPhone;
 			
 			// create Personal customer
-			System.out.print("Please input the customer's first name: ");
-			customerName = userInput.next();
-			customerFullName = customerName;
-			System.out.print("Please input the customer's surname: ");
-			customerName = userInput.next();
-			customerFullName += " " + customerName;
-			System.out.print("\nPlease input a valid email: ");
-			customerEmail = userInput.next();
-			System.out.print("\nPlease input the customer's home phone number or a cell phone number: ");
-			customerHomePhone = userInput.next();
-			System.out.print("\nPlease input the customer's work phone number: ");
-			customerWorkPhone = userInput.next();
-
+			try {
+				System.out.print("Please input the customer's first name: ");
+				customerName = userInput.next();
+				customerFullName = customerName;
+				System.out.print("Please input the customer's surname: ");
+				customerName = userInput.next();
+				customerFullName += " " + customerName;
+				System.out.print("\nPlease input a valid email: ");
+				customerEmail = userInput.next();
+				System.out.print("\nPlease input the customer's home phone number or a cell phone number: ");
+				customerHomePhone = userInput.next();
+				System.out.print("\nPlease input the customer's work phone number: ");
+				customerWorkPhone = userInput.next();
+			
 			//PersonalCustomer(long customerId, String name, String email, String homePhone, String workPhone)
 			newPersonal = new PersonalCustomer(UniqueIDFactory.generateUniqueID(), customerFullName, customerEmail, customerHomePhone, customerWorkPhone);
 			customerArray.add(newPersonal);
+			}catch (RuntimeException e ) {
+				System.err.print("Invalid input");
+			}
 		} else if(customerInput.equals("2")) {
 			
 			int customerCreditRating;
@@ -124,25 +128,29 @@ public class Bank implements Serializable {
 			String contactPersonPhone;
 			
 			// create commercial customer
-			System.out.print("Please input the customer's first name and surname: ");
-			customerName = userInput.next();
-			customerFullName = customerName;
-			customerName = userInput.next();
-			customerFullName += " " + customerName;
-			System.out.print("\nPlease input a valid email: ");
-			customerEmail = userInput.next();
-			System.out.print("Please input the customer's credit rating: ");
-			customerCreditRating = userInput.nextInt();
-			System.out.print("Please input the first and last name of the contact person for the account: ");
-			contactPersonFirstName = userInput.next();
-			contactPersonLastName = userInput.next();
-			contactPerson = contactPersonFirstName + contactPersonLastName;
-			System.out.print("Please input the phone number for the contact person: ");
-			contactPersonPhone = userInput.next();
-			
-			//CommercialCustomer(long customerId, String name, String email, int creditRating, String contactPerson,String contactPersonPhone)
-			newCommercial = new CommercialCustomer(UniqueIDFactory.generateUniqueID(), customerFullName, customerEmail, customerCreditRating, contactPerson, contactPersonPhone);
-			customerArray.add(newCommercial);
+			try {
+				System.out.print("Please input the customer's first name and surname: ");
+				customerName = userInput.next();
+				customerFullName = customerName;
+				customerName = userInput.next();
+				customerFullName += " " + customerName;
+				System.out.print("\nPlease input a valid email: ");
+				customerEmail = userInput.next();
+				System.out.print("Please input the customer's credit rating: ");
+				customerCreditRating = userInput.nextInt();
+				System.out.print("Please input the first and last name of the contact person for the account: ");
+				contactPersonFirstName = userInput.next();
+				contactPersonLastName = userInput.next();
+				contactPerson = contactPersonFirstName + contactPersonLastName;
+				System.out.print("Please input the phone number for the contact person: ");
+				contactPersonPhone = userInput.next();
+				
+				//CommercialCustomer(long customerId, String name, String email, int creditRating, String contactPerson,String contactPersonPhone)
+				newCommercial = new CommercialCustomer(UniqueIDFactory.generateUniqueID(), customerFullName, customerEmail, customerCreditRating, contactPerson, contactPersonPhone);
+				customerArray.add(newCommercial);
+			} catch (RuntimeException e) {
+				System.err.print("Invalid input");
+			}
 		} 
 		
 		for(Customer c : customerArray) {
@@ -179,15 +187,17 @@ public class Bank implements Serializable {
 			}
 			
 			// Select customer
-			
-			System.out.print("\nHow much would you like to deposit for the starting balance of your account: ");
-			startingBalance = userInput.nextDouble();
-			
-			//(String accountNumber, double accountBalance, Customer customer, Date dateCreated)
-			Account chkAcct = new CheckingAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
-			accountArray.add(chkAcct);
-			System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
+			try {
+				System.out.print("\nHow much would you like to deposit for the starting balance of your account: ");
+				startingBalance = userInput.nextDouble();
 				
+				//(String accountNumber, double accountBalance, Customer customer, Date dateCreated)
+				Account chkAcct = new CheckingAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
+				accountArray.add(chkAcct);
+				System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
+			} catch (RuntimeException e) {
+				System.err.print("Invalid input");
+			}
 			
 		}else {
 			System.out.println("There are no customers to make an account with...");
@@ -562,13 +572,14 @@ public class Bank implements Serializable {
 	 */
 	public void exit() {// throws exception every time
 		
-		File f = new File("bankdata.dat");
+		File f = new File("bankdata.ser");
 		try {
 			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(f));
 			output.writeObject(accountArray);
 			System.out.println("Saved");
 		} catch (IOException ioException) {
 			System.err.println("Error opening file.");
+			//ioException.printStackTrace();
 			System.out.println();
 		}
 		
@@ -580,7 +591,7 @@ public class Bank implements Serializable {
 	 */
 	public void openFileForReading() throws ClassNotFoundException {
 		
-		File f = new File("bankdata.dat");
+		File f = new File("bankdata.ser");
 		if(f.exists()) {
 
 			try {
@@ -590,6 +601,7 @@ public class Bank implements Serializable {
 	
 			} catch(IOException ioException) {
 				System.err.println("Error opening file.");
+				//ioException.printStackTrace();
 				System.out.println();
 			}
 	}
