@@ -195,8 +195,8 @@ public class Bank implements Serializable {
 				Account chkAcct = new CheckingAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
 				accountArray.add(chkAcct);
 				System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
-			} catch (RuntimeException e) {
-				System.err.print("Invalid input");
+			} catch (NumberFormatException n) {
+				System.err.print("Invalid Number Format");
 			}
 			
 		}else {
@@ -231,10 +231,12 @@ public class Bank implements Serializable {
 					}
 				}
 			}
-		
-			System.out.print("\nHow much would you like to deposit for the starting balance of your account: ");
-			startingBalance = userInput.nextDouble();
-			
+			try {
+				System.out.print("\nHow much would you like to deposit for the starting balance of your account: ");
+				startingBalance = userInput.nextDouble();
+			}catch(NumberFormatException n) {
+				System.err.print("Invalid number format");
+			}
 			Account goldAcct = new GoldAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
 			accountArray.add(goldAcct);
 			System.out.println("Gold account has been successfully created. Your accountNumber is: " + goldAcct.getAccountNumber() + "\n");
@@ -272,9 +274,12 @@ public class Bank implements Serializable {
 			}
 		
 		//RegularAccount(long accountNumber, double accountBalance, Customer customer, Date dateCreated, double interestRate)
-		
-			System.out.print("\nWhat is the initial deposit into the account: ");
-			startingBalance = userInput.nextDouble();
+			try {
+				System.out.print("\nWhat is the initial deposit into the account: ");
+				startingBalance = userInput.nextDouble();
+			} catch(NumberFormatException n) {
+				System.err.print("Invalid Number Format");
+			}
 			Account regularAcct = new RegularAccount(UniqueIDFactory.generateUniqueID(), startingBalance, customer, newDate);
 			accountArray.add(regularAcct);
 			System.out.println("Regular Account has been created. Your account number is : " + regularAcct.getAccountNumber() + "\n");
@@ -371,7 +376,7 @@ public class Bank implements Serializable {
 			return accountFound;
 	}
 	
-	/*
+	/**
 	 * User enters a account number, and if the account is in the accountArray, account information, number, and balance will be displayed.
 	 */
 	public void displayAccountInfo() { 
