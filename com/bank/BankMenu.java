@@ -98,6 +98,20 @@ public class BankMenu extends Application{
 		    
 		    menuBar.getMenus().addAll(fileMenu, createMenu, transactionsMenu, maintenanceMenu, displayMenu);
 		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
 		    return mainPane;
 	 }
 
