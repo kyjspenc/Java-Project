@@ -13,6 +13,8 @@ import java.util.List;
 
 import com.bank.accounts.Account;
 import com.bank.accounts.CheckingAccount;
+import com.bank.accounts.GoldAccount;
+import com.bank.accounts.RegularAccount;
 import com.bank.customer.CommercialCustomer;
 import com.bank.customer.Customer;
 import com.bank.customer.PersonalCustomer;
@@ -280,11 +282,11 @@ public class BankMenu extends Application implements Serializable{
 			    	
 			    	lblPaneTitle.setText("Enter Gold Account Information: ");
 			    	centerPane.add(lblPaneTitle, 0, 0);
-			    	centerPane.add(lblAccountNumber, 0, 1);
+			    	//centerPane.add(lblAccountNumber, 0, 1);
 			    	centerPane.add(lblaccountBalance, 0, 2);
 			    	centerPane.add(lblCustomerName, 0, 3);
 			    	
-			    	centerPane.add(txtAccountNumber, 1, 1);
+			    	//centerPane.add(txtAccountNumber, 1, 1);
 			    	centerPane.add(txtAccountBalance, 1, 2);
 			    	centerPane.add(txtCustomerName, 1, 3);
 			    	
@@ -321,6 +323,8 @@ public class BankMenu extends Application implements Serializable{
 			    	centerPane.add(lblPaneTitle, 0, 0);
 			    	centerPane.add(textOutputArea, 0, 1);
 			    	centerPane.add(btnSubmitRegular, 1, 2);
+			    	
+			    	mainPane.setCenter(centerPane);
 			    });
 		    //}
 		    /*
@@ -352,10 +356,16 @@ public class BankMenu extends Application implements Serializable{
 		    	String customerEmail = txtEmail.toString();
 		    	int customerCreditRating = Integer.parseInt(txtCreditRating.toString());
 		    	String contactPerson = txtContactPerson.toString();
-		    	String contactPersonPhone = txtContactPerson.toString();
+		    	String contactPersonPhone = txtContactPhone.toString();
 		    	
 		    	Customer newCommercial = new CommercialCustomer(UniqueIDFactory.generateUniqueID(), customerFullName, customerEmail, customerCreditRating, contactPerson, contactPersonPhone);
 				customerArray.add(newCommercial);
+				
+				txtName.clear();
+				txtEmail.clear();
+				txtCreditRating.clear();
+				txtContactPerson.clear();
+				txtContactPhone.clear();
 				
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
@@ -380,12 +390,63 @@ public class BankMenu extends Application implements Serializable{
 				accountArray.add(chkAcct);
 				System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
 				
+				txtCustomerName.clear();
+				txtAccountBalance.clear();
+				
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
 		    });
 		    
 		    btnSubmitGold.setOnAction(actionEvent -> {
+		    	Date newDate = new Date();
 		    	
+		    	double startingBalance = Double.parseDouble(txtAccountBalance.getText());
+		    	
+		    	String customerInput = txtCustomerName.toString();
+		    	Customer customer = null;
+		    	
+		    	for(Customer c : customerArray) {
+					if(c.getName().equals(customerInput)) {
+						customer = c;
+						//customerSelected = true;
+					}
+				}
+		    	
+		    	Account goldAcct = new GoldAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
+				accountArray.add(goldAcct);
+				System.out.println("Gold account has been successfully created. Your accountNumber is: " + goldAcct.getAccountNumber() + "\n");
+		   
+				txtCustomerName.clear();
+				txtAccountBalance.clear();
+				
+				centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
+		    });
+		    
+		    btnSubmitRegular.setOnAction(actionEvent ->{
+		    	Date newDate = new Date();
+		    	
+		    	double startingBalance = Double.parseDouble(txtAccountBalance.getText());
+		    	
+		    	String customerInput = txtCustomerName.toString();
+		    	Customer customer = null;
+		    	
+		    	for(Customer c : customerArray) {
+					if(c.getName().equals(customerInput)) {
+						customer = c;
+						//customerSelected = true;
+					}
+				}
+		    	
+		    	Account regularAcct = new RegularAccount(UniqueIDFactory.generateUniqueID(), startingBalance, customer, newDate);
+				accountArray.add(regularAcct);
+				System.out.println("Regular Account has been created. Your account number is : " + regularAcct.getAccountNumber() + "\n");
+		    
+				txtCustomerName.clear();
+				txtAccountBalance.clear();
+				
+				centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
 		    });
 		    
 		    
