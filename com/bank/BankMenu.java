@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +46,12 @@ import javafx.stage.Stage;
  * This class is for the GUI
  * Ver 1.0;
  */
-public class BankMenu extends Application {
+public class BankMenu extends Application implements Serializable{
 	
 	List<Account> accountArray = new ArrayList<Account>();
 	List<Customer> customerArray = new ArrayList<Customer>();
 	
-	//openFileForReading();
+	
 	//create all labels to be used:
 	
 		Label lblPaneTitle = new Label(), 
@@ -88,8 +89,9 @@ public class BankMenu extends Application {
 	}
 	
 	 @Override
-	  public void start(Stage primaryStage) {
+	  public void start(Stage primaryStage) throws ClassNotFoundException {
 	    
+		openFileForReading();
 	    Scene scene = new Scene(getPane(), 550,350, Color.WHITE);
 	    primaryStage.setTitle("Bank");
 	    primaryStage.setScene(scene);
@@ -160,6 +162,7 @@ public class BankMenu extends Application {
 		    displayMenu.getItems().add(bankStatsMenuItem);
 		    
 		    exitMenuItem.setOnAction(actionEvent -> {
+		    	exit();
 		    	Platform.exit();
 		    });
 		        
@@ -348,7 +351,7 @@ public class BankMenu extends Application {
 		    return mainPane;
 }
 	 
-	 /*public void openFileForReading() throws ClassNotFoundException {
+	 public void openFileForReading() throws ClassNotFoundException {
 			
 			File f = new File("bankdata.ser");
 			if(f.exists()) {
@@ -378,6 +381,6 @@ public class BankMenu extends Application {
 				System.out.println();
 			}
 			
-		}*/
+		}
 
 }
