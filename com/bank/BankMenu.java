@@ -1,9 +1,16 @@
 package com.bank;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.bank.accounts.Account;
+import com.bank.customer.CommercialCustomer;
 import com.bank.customer.Customer;
 import com.bank.customer.PersonalCustomer;
 import com.bank.utils.UniqueIDFactory;
@@ -43,7 +50,7 @@ public class BankMenu extends Application {
 	List<Account> accountArray = new ArrayList<Account>();
 	List<Customer> customerArray = new ArrayList<Customer>();
 	
-	private 
+	//openFileForReading();
 	//create all labels to be used:
 	
 		Label lblPaneTitle = new Label(), 
@@ -233,65 +240,65 @@ public class BankMenu extends Application {
 		    	mainPane.setCenter(centerPane);
 		  
 		    });
-		    
-		    checkingMenu.setOnAction(actionEvent -> {
-		    	mainPane.setCenter(null);
-		    	centerPane.getChildren().clear();
-		    	
-		    	lblPaneTitle.setText("Enter Checking Account Info: ");
-		    	centerPane.add(lblPaneTitle, 0, 0);
-
-		    	centerPane.add(lblAccountNumber, 0, 1);
-		    	centerPane.add(lblaccountBalance, 0, 2);
-		    	centerPane.add(lblCustomerName, 0, 3);
-		    	
-		    	centerPane.add(txtAccountNumber, 1, 1);
-		    	centerPane.add(txtAccountBalance, 1, 2);
-		    	centerPane.add(txtCustomerName, 1, 3);
-		    	
-		    	centerPane.add(btnSubmitChecking, 1, 4);
-		    	
-		    	mainPane.setCenter(centerPane);
-		    });
-		   
-		    goldMenu.setOnAction(actionEvent -> {
-		    	mainPane.setCenter(null);
-		    	centerPane.getChildren().clear();
-		    	
-		    	lblPaneTitle.setText("Enter Gold Account Information: ");
-		    	centerPane.add(lblPaneTitle, 0, 0);
-		    	centerPane.add(lblAccountNumber, 0, 1);
-		    	centerPane.add(lblaccountBalance, 0, 2);
-		    	centerPane.add(lblCustomerName, 0, 3);
-		    	
-		    	centerPane.add(txtAccountNumber, 1, 1);
-		    	centerPane.add(txtAccountBalance, 1, 2);
-		    	centerPane.add(txtCustomerName, 1, 3);
-		    	
-		    	centerPane.add(btnSubmitGold, 1, 4);
-		    	
-		    	mainPane.setCenter(centerPane);
-		    });
-		    
-		    regularMenu.setOnAction(actionEvent -> {
-		    	mainPane.setCenter(null);
-		    	centerPane.getChildren().clear();
-		    	
-		    	lblPaneTitle.setText("Enter Regular Account Information: ");
-		    	centerPane.add(lblPaneTitle, 0, 0);
-		    	centerPane.add(lblAccountNumber, 0, 1);
-		    	centerPane.add(lblaccountBalance, 0, 2);
-		    	centerPane.add(lblCustomerName, 0, 3);
-		    	
-		    	centerPane.add(txtAccountNumber, 1, 1);
-		    	centerPane.add(txtAccountBalance, 1, 2);
-		    	centerPane.add(txtCustomerName, 1, 3);
-		    	
-		    	centerPane.add(btnSubmitRegular, 1, 4);
-		    	
-		    	mainPane.setCenter(centerPane);
-		    });
-		    
+		    //if(!customerArray.isEmpty()) {
+			    checkingMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	
+			    	lblPaneTitle.setText("Enter Checking Account Info: ");
+			    	centerPane.add(lblPaneTitle, 0, 0);
+	
+			    	//centerPane.add(lblAccountNumber, 0, 1);
+			    	centerPane.add(lblaccountBalance, 0, 2);
+			    	centerPane.add(lblCustomerName, 0, 3);
+			    	
+			    	//centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(txtAccountBalance, 1, 2);
+			    	centerPane.add(txtCustomerName, 1, 3);
+			    	
+			    	centerPane.add(btnSubmitChecking, 1, 4);
+			    	
+			    	mainPane.setCenter(centerPane);
+			    });
+			   
+			    goldMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	
+			    	lblPaneTitle.setText("Enter Gold Account Information: ");
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(lblAccountNumber, 0, 1);
+			    	centerPane.add(lblaccountBalance, 0, 2);
+			    	centerPane.add(lblCustomerName, 0, 3);
+			    	
+			    	centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(txtAccountBalance, 1, 2);
+			    	centerPane.add(txtCustomerName, 1, 3);
+			    	
+			    	centerPane.add(btnSubmitGold, 1, 4);
+			    	
+			    	mainPane.setCenter(centerPane);
+			    });
+			    
+			    regularMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	
+			    	lblPaneTitle.setText("Enter Regular Account Information: ");
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	//centerPane.add(lblAccountNumber, 0, 1);
+			    	centerPane.add(lblaccountBalance, 0, 2);
+			    	centerPane.add(lblCustomerName, 0, 3);
+			    	
+			    	//centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(txtAccountBalance, 1, 2);
+			    	centerPane.add(txtCustomerName, 1, 3);
+			    	
+			    	centerPane.add(btnSubmitRegular, 1, 4);
+			    	
+			    	mainPane.setCenter(centerPane);
+			    });
+		    //}
 		    /*
 		     * This section will have to handle what happens once the submit button is pressed
 		     * This will have to handle all the text conversions to manageable data. 
@@ -308,7 +315,23 @@ public class BankMenu extends Application {
 		    	Customer newPersonal = new PersonalCustomer(UniqueIDFactory.generateUniqueID(), customerName, customerEmail, customerHomePhone, customerWorkPhone);
 				customerArray.add(newPersonal);
 				
-				//I'm not sure about how to get back to the main panel
+				centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
+		    });
+		    
+		    btnSubmitCommercialCust.setOnAction(actionEvent ->{
+		    	
+		    	String customerFullName = txtName.toString();
+		    	String customerEmail = txtEmail.toString();
+		    	int customerCreditRating = Integer.parseInt(txtCreditRating.toString());
+		    	String contactPerson = txtContactPerson.toString();
+		    	String contactPersonPhone = txtContactPerson.toString();
+		    	
+		    	Customer newCommercial = new CommercialCustomer(UniqueIDFactory.generateUniqueID(), customerFullName, customerEmail, customerCreditRating, contactPerson, contactPersonPhone);
+				customerArray.add(newCommercial);
+				
+				centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
 		    });
 		    
 		    btnSubmitChecking.setOnAction(actionEvent -> {
@@ -324,5 +347,37 @@ public class BankMenu extends Application {
 		    
 		    return mainPane;
 }
+	 
+	 /*public void openFileForReading() throws ClassNotFoundException {
+			
+			File f = new File("bankdata.ser");
+			if(f.exists()) {
+
+				try {
+					ObjectInputStream input = new ObjectInputStream(new FileInputStream(f));
+
+					accountArray = (ArrayList<Account>) input.readObject();
+		
+				} catch(IOException ioException) {
+					System.err.println("Error opening file.");
+					//ioException.printStackTrace();
+					System.out.println();
+				}
+			}
+		}
+	 public void exit() {
+			
+			File f = new File("bankdata.ser");
+			try {
+				ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(f));
+				output.writeObject(accountArray);
+				System.out.println("Saved");
+			} catch (IOException ioException) {
+				System.err.println("Error opening file.");
+				//ioException.printStackTrace();
+				System.out.println();
+			}
+			
+		}*/
 
 }
