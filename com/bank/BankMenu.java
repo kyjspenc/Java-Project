@@ -15,7 +15,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -31,26 +30,29 @@ import javafx.stage.Stage;
  * Ver 1.0;
  */
 public class BankMenu extends Application{
-		Label lblPaneTitle = new Label("S");
-		Label lblAccountNumber = new Label("Account Number");
-    	Label lblaccountBalance = new Label("Account Balance");
-    	Label lblCustomerName = new Label("Customer Name");
-    	TextField txtAccountNumber = new TextField();
-    	TextField txtAccountBalance = new TextField();
-    	TextField txtCustomerName = new TextField();
-    	Button btnSubmitChecking = new Button("Submit");
-    	
-    	
-    	Label lblEnterName = new Label("Name");
-    	Label lblEnterEmail = new Label("Email");
-    	Label lblHomePhone = new Label("Home Phone");
-    	Label lblWorkPhone = new Label("Work Phone");
-    	TextField txtName = new TextField();
-    	TextField txtEmail = new TextField();
-    	TextField txtHomePhone = new TextField();
-    	TextField txtWorkPhone = new TextField();
-    	
-    	Button btnSubmitCustomer = new Button("Submit");
+	//create all labels to be used: 
+		Label lblPaneTitle = new Label(), 
+				lblAccountNumber = new Label("Account Number"), 
+				lblaccountBalance = new Label("Account Balance"),
+				lblCustomerName = new Label("Customer Name"), lblEnterName = new Label("Name"), 
+				lblEnterEmail = new Label("Email"),
+				lblHomePhone = new Label("Home Phone"), 
+				lblWorkPhone = new Label("Work Phone");
+    	TextField txtAccountNumber = new TextField(), 
+    			txtAccountBalance = new TextField(), 
+    			txtCustomerName = new TextField(),
+    			txtName = new TextField(), 
+    			txtEmail = new TextField(),  
+    			txtHomePhone = new TextField(), 
+    			txtWorkPhone = new TextField();
+
+    	Button btnSubmitChecking = new Button("Create Checking Account"), 
+    			btnSubmitGold = new Button("Create Gold Account"), 
+    			btnSubmitPersonalCust = new Button("Create Customer"), 
+    			btnSubmitCommercialCust = new Button("Create Customer"), 
+    			btnSubmitRegular = new Button("Create Regular Account");
+    	Checkbox 
+
     	
     	public static void main(String[] args) {
     		launch(args);
@@ -127,12 +129,17 @@ public class BankMenu extends Application{
 		    
 		    MenuItem bankStatsMenuItem = new MenuItem("Display Bank Stats");
 		    displayMenu.getItems().add(bankStatsMenuItem);
+		    
+		    exitMenuItem.setOnAction(actionEvent -> {
+		    	Platform.exit();
+		    });
 		        
 		    /********************************
 		     * These are all the on action events
 		     * Place any events that will occur one button clicks
 		     * beyond this point
 		     *********************************/
+		    
 		    customerMenu.setOnAction(actionEvent -> {
 		    	mainPane.setCenter(null);
 		    	centerPane.getChildren().clear();
@@ -149,7 +156,7 @@ public class BankMenu extends Application{
 		    	centerPane.add(txtHomePhone, 1, 3);
 		    	centerPane.add(txtWorkPhone, 1, 4);
 		    	
-		    	centerPane.add(btnSubmitCustomer, 1, 5);
+		    	centerPane.add(btnSubmitPersonalCust, 1, 5);
 		    	
 		    	mainPane.setCenter(centerPane);
 		    	
@@ -161,15 +168,7 @@ public class BankMenu extends Application{
 		    	
 		    	lblPaneTitle.setText("Enter Checking Account Info: ");
 		    	centerPane.add(lblPaneTitle, 0, 0);
-		    	Label lblAccountNumber = new Label("Account Number");
-		    	Label lblaccountBalance = new Label("Account Balance");
-		    	Label lblCustomerName = new Label("Customer Name");
 
-		    	TextField txtAccountNumber = new TextField();
-		    	TextField txtAccountBalance = new TextField();
-		    	TextField txtCustomerName = new TextField();
-		    	
-		    	Button btnSubmitChecking = new Button("Submit");
 		    	centerPane.add(lblAccountNumber, 0, 1);
 		    	centerPane.add(lblaccountBalance, 0, 2);
 		    	centerPane.add(lblCustomerName, 0, 3);
@@ -187,7 +186,7 @@ public class BankMenu extends Application{
 		    	mainPane.setCenter(null);
 		    	centerPane.getChildren().clear();
 		    	
-		    	lblPaneTitle.setText("Enter Gold Account Info: ");
+		    	lblPaneTitle.setText("Enter Gold Account Information: ");
 		    	centerPane.add(lblPaneTitle, 0, 0);
 		    	centerPane.add(lblAccountNumber, 0, 1);
 		    	centerPane.add(lblaccountBalance, 0, 2);
@@ -197,18 +196,48 @@ public class BankMenu extends Application{
 		    	centerPane.add(txtAccountBalance, 1, 2);
 		    	centerPane.add(txtCustomerName, 1, 3);
 		    	
-		    	centerPane.add(btnSubmitChecking, 1, 4);
+		    	centerPane.add(btnSubmitGold, 1, 4);
 		    	
 		    	mainPane.setCenter(centerPane);
+		    });
+		    
+		    regularMenu.setOnAction(actionEvent -> {
+		    	mainPane.setCenter(null);
+		    	centerPane.getChildren().clear();
+		    	
+		    	lblPaneTitle.setText("Enter Regular Account Information: ");
+		    	centerPane.add(lblPaneTitle, 0, 0);
+		    	centerPane.add(lblAccountNumber, 0, 1);
+		    	centerPane.add(lblaccountBalance, 0, 2);
+		    	centerPane.add(lblCustomerName, 0, 3);
+		    	
+		    	centerPane.add(txtAccountNumber, 1, 1);
+		    	centerPane.add(txtAccountBalance, 1, 2);
+		    	centerPane.add(txtCustomerName, 1, 3);
+		    	
+		    	centerPane.add(btnSubmitRegular, 1, 4);
+		    	
+		    	mainPane.setCenter(centerPane);
+		    });
+		    
+		    /*
+		     * This section will have to handle what happens once the submit button is pressed
+		     * This will have to handle all the text conversions to manageable data. 
+		     * There are buttons for each pane presented in order to easily manage which 
+		     * button was used. 
+		     */
+		    btnSubmitPersonalCust.setOnAction(actionEvent -> {
+		    	
 		    });
 		    
 		    btnSubmitChecking.setOnAction(actionEvent -> {
 		    	
 		    });
 		    
-		    exitMenuItem.setOnAction(actionEvent -> {
-		    	Platform.exit();
+		    btnSubmitGold.setOnAction(actionEvent -> {
+		    	
 		    });
+		    
 		    
 		    menuBar.getMenus().addAll(fileMenu, createMenu, transactionsMenu, maintenanceMenu, displayMenu);
 		    
