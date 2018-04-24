@@ -85,7 +85,8 @@ public class BankMenu extends Application implements Serializable{
     			btnSubmitGold = new Button("Create Gold Account"), 
     			btnSubmitPersonalCust = new Button("Create Personal Customer"), 
     			btnSubmitCommercialCust = new Button("Create Commercial Customer"),
-    			btnSubmitRegular = new Button("Create Regular Account");
+    			btnSubmitRegular = new Button("Create Regular Account"), 
+    			btnExit = new Button("Exit");
     	
     	CheckBox cbCommercial = new CheckBox("Commercial");
     	
@@ -322,7 +323,7 @@ public class BankMenu extends Application implements Serializable{
 			    	//element, column, row
 			    	centerPane.add(lblPaneTitle, 0, 0);
 			    	centerPane.add(textOutputArea, 0, 1);
-			    	centerPane.add(btnSubmitRegular, 1, 2);
+			    	centerPane.add(btnExit, 1, 2);
 			    	
 			    	mainPane.setCenter(centerPane);
 			    });
@@ -447,6 +448,13 @@ public class BankMenu extends Application implements Serializable{
 				
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
+		    });
+		    
+		    btnExit.setOnAction(actionEvent -> {
+		    	
+		    	centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
+		    
 		    });
 		    
 		    
