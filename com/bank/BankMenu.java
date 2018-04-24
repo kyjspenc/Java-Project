@@ -29,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -85,6 +86,8 @@ public class BankMenu extends Application implements Serializable{
     			btnSubmitRegular = new Button("Create Regular Account");
     	
     	CheckBox cbCommercial = new CheckBox("Commercial");
+    	
+    	TextArea textOutputArea = new TextArea();
     	
     	public static void main(String[] args) {
     		launch(args);
@@ -169,6 +172,7 @@ public class BankMenu extends Application implements Serializable{
 		    displayMenu.getItems().add(bankStatsMenuItem);
 		    
 		    exitMenuItem.setOnAction(actionEvent -> {
+		    	exit();
 		    	Platform.exit();
 		    });
 		        
@@ -306,6 +310,17 @@ public class BankMenu extends Application implements Serializable{
 			    	centerPane.add(btnSubmitRegular, 1, 4);
 			    	
 			    	mainPane.setCenter(centerPane);
+			    });
+			    
+			    allAccountsMenuItem.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	
+			    	lblPaneTitle.setText("Display All Accounts");
+			    	//element, column, row
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(textOutputArea, 0, 1);
+			    	centerPane.add(btnSubmitRegular, 1, 2);
 			    });
 		    //}
 		    /*
