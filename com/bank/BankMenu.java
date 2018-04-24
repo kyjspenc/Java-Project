@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -37,21 +38,29 @@ public class BankMenu extends Application{
 				lblCustomerName = new Label("Customer Name"), lblEnterName = new Label("Name"), 
 				lblEnterEmail = new Label("Email"),
 				lblHomePhone = new Label("Home Phone"), 
-				lblWorkPhone = new Label("Work Phone");
+				lblWorkPhone = new Label("Work Phone"),
+				lblCreditRating = new Label("Credit Rating"),
+				lblContactPerson = new Label("Contact Person Name"),
+				lblContactPhone = new Label("Contact Person's Phone");
+		
     	TextField txtAccountNumber = new TextField(), 
     			txtAccountBalance = new TextField(), 
     			txtCustomerName = new TextField(),
     			txtName = new TextField(), 
     			txtEmail = new TextField(),  
     			txtHomePhone = new TextField(), 
-    			txtWorkPhone = new TextField();
+    			txtWorkPhone = new TextField(),
+    			txtCreditRating = new TextField(),
+    			txtContactPerson = new TextField(),
+    			txtContactPhone = new TextField();
 
     	Button btnSubmitChecking = new Button("Create Checking Account"), 
     			btnSubmitGold = new Button("Create Gold Account"), 
     			btnSubmitPersonalCust = new Button("Create Customer"), 
-    			btnSubmitCommercialCust = new Button("Create Customer"), 
+    			btnSubmitCommercialCust = new Button("Create Customer"),
     			btnSubmitRegular = new Button("Create Regular Account");
-    	Checkbox 
+    	CheckBox cbCommercial = new CheckBox("Commercial");
+    	
 
     	
     	public static void main(String[] args) {
@@ -139,17 +148,67 @@ public class BankMenu extends Application{
 		     * Place any events that will occur one button clicks
 		     * beyond this point
 		     *********************************/
+		    cbCommercial.setOnAction(actionEvent -> {
+		    	if(cbCommercial.isSelected()) {
+		    		mainPane.setCenter(null);
+				    centerPane.getChildren().clear();
+			    		
+			    	lblPaneTitle.setText("Enter Customer Information: ");
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(lblEnterName, 0, 1);
+			    	centerPane.add(lblEnterEmail, 0, 2);
+			    	centerPane.add(lblCreditRating, 0, 3);
+			    	centerPane.add(lblContactPerson, 0, 4);
+			    	centerPane.add(lblContactPhone, 0, 5);
+			    	
+			    	centerPane.add(cbCommercial, 1, 0);
+			    	
+			    	centerPane.add(txtName, 1, 1);
+			    	centerPane.add(txtEmail, 1, 2);
+			    	centerPane.add(txtCreditRating, 1, 3);
+			    	centerPane.add(txtContactPerson, 1, 4);
+			    	centerPane.add(txtContactPhone, 1, 5);
+			    	
+			    	centerPane.add(btnSubmitPersonalCust, 1, 6);
+			    	
+			    	mainPane.setCenter(centerPane);
+		    	}
+		    	else {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+		    		
+		    		lblPaneTitle.setText("Enter Customer Information: ");
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(lblEnterName, 0, 1);
+			    	centerPane.add(lblEnterEmail, 0, 2);
+			    	centerPane.add(lblHomePhone, 0, 3);
+			    	centerPane.add(lblWorkPhone, 0, 4);
+			    	
+			    	centerPane.add(cbCommercial, 1, 0);
+			    	
+			    	centerPane.add(txtName, 1, 1);
+			    	centerPane.add(txtEmail, 1, 2);
+			    	centerPane.add(txtHomePhone, 1, 3);
+			    	centerPane.add(txtWorkPhone, 1, 4);
+			    	
+			    	centerPane.add(btnSubmitPersonalCust, 1, 5);
+			    	
+			    	mainPane.setCenter(centerPane);
+		    	}
+		    });
 		    
-		    customerMenu.setOnAction(actionEvent -> {
+		    customerMenu.setOnAction(actionEvent -> {   	
 		    	mainPane.setCenter(null);
 		    	centerPane.getChildren().clear();
-		    	
-		    	lblPaneTitle.setText("Enter Customer Information: ");
+	    		
+	    		lblPaneTitle.setText("Enter Customer Information: ");
 		    	centerPane.add(lblPaneTitle, 0, 0);
 		    	centerPane.add(lblEnterName, 0, 1);
 		    	centerPane.add(lblEnterEmail, 0, 2);
 		    	centerPane.add(lblHomePhone, 0, 3);
 		    	centerPane.add(lblWorkPhone, 0, 4);
+		    	
+		    	centerPane.add(cbCommercial, 1, 0);
 		    	
 		    	centerPane.add(txtName, 1, 1);
 		    	centerPane.add(txtEmail, 1, 2);
@@ -159,7 +218,7 @@ public class BankMenu extends Application{
 		    	centerPane.add(btnSubmitPersonalCust, 1, 5);
 		    	
 		    	mainPane.setCenter(centerPane);
-		    	
+		  
 		    });
 		    
 		    checkingMenu.setOnAction(actionEvent -> {
