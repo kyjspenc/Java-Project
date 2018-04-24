@@ -8,9 +8,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.bank.accounts.Account;
+import com.bank.accounts.CheckingAccount;
 import com.bank.customer.CommercialCustomer;
 import com.bank.customer.Customer;
 import com.bank.customer.PersonalCustomer;
@@ -51,7 +53,7 @@ public class BankMenu extends Application implements Serializable{
 	List<Account> accountArray = new ArrayList<Account>();
 	List<Customer> customerArray = new ArrayList<Customer>();
 	
-	
+	//
 	//create all labels to be used:
 	
 		Label lblPaneTitle = new Label(), 
@@ -89,9 +91,14 @@ public class BankMenu extends Application implements Serializable{
 	}
 	
 	 @Override
-	  public void start(Stage primaryStage) throws ClassNotFoundException {
+	  public void start(Stage primaryStage) {
 	    
-		openFileForReading();
+		try {
+			openFileForReading();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    Scene scene = new Scene(getPane(), 550,350, Color.WHITE);
 	    primaryStage.setTitle("Bank");
 	    primaryStage.setScene(scene);
@@ -162,7 +169,6 @@ public class BankMenu extends Application implements Serializable{
 		    displayMenu.getItems().add(bankStatsMenuItem);
 		    
 		    exitMenuItem.setOnAction(actionEvent -> {
-		    	exit();
 		    	Platform.exit();
 		    });
 		        
@@ -317,6 +323,9 @@ public class BankMenu extends Application implements Serializable{
 		    	
 		    	Customer newPersonal = new PersonalCustomer(UniqueIDFactory.generateUniqueID(), customerName, customerEmail, customerHomePhone, customerWorkPhone);
 				customerArray.add(newPersonal);
+				System.out.println("Created");
+				
+				//Need to clear text boxes on exit
 				
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
@@ -338,7 +347,26 @@ public class BankMenu extends Application implements Serializable{
 		    });
 		    
 		    btnSubmitChecking.setOnAction(actionEvent -> {
+		    	Date newDate = new Date();
+//		    	double startingBalance = Double.parseDouble(txtAccountBalance.toString());
+		    	double startingBalance = Double.parseDouble(txtAccountBalance.getText());
 		    	
+		    	String customerInput = txtCustomerName.toString();
+		    	Customer customer = null;
+		    	
+		    	for(Customer c : customerArray) {
+					if(c.getName().equals(customerInput)) {
+						customer = c;
+						//customerSelected = true;
+					}
+				}
+		    	
+		    	Account chkAcct = new CheckingAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
+				accountArray.add(chkAcct);
+				System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
+				
+				centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
 		    });
 		    
 		    btnSubmitGold.setOnAction(actionEvent -> {
