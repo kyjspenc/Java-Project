@@ -322,10 +322,27 @@ public class BankMenu extends Application implements Serializable{
 			    	lblPaneTitle.setText("Display All Accounts");
 			    	//element, column, row
 			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	textOutputArea.setEditable(false);
 			    	centerPane.add(textOutputArea, 0, 1);
 			    	centerPane.add(btnExit, 1, 2);
 			    	
+			    	for(Account a : accountArray) {
+			    		
+			    		textOutputArea.appendText(a.getCustomer().getName() + "\t" + a.getAccountNumber() + "\n");
+			    		
+			    	}
+			    	
 			    	mainPane.setCenter(centerPane);
+			    });
+			    
+			    bankStatsMenuItem.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	
+			    	lblPaneTitle.setText("Display Bank Statistics");
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(textOutputArea, 0, 1);
+			    	centerPane.add(btnExit, 1, 2);
 			    });
 		    //}
 		    /*
@@ -451,6 +468,8 @@ public class BankMenu extends Application implements Serializable{
 		    });
 		    
 		    btnExit.setOnAction(actionEvent -> {
+		    	
+		    	textOutputArea.clear();
 		    	
 		    	centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
