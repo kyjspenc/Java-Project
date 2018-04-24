@@ -1,5 +1,13 @@
 package com.bank;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bank.accounts.Account;
+import com.bank.customer.Customer;
+import com.bank.customer.PersonalCustomer;
+import com.bank.utils.UniqueIDFactory;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -22,16 +30,22 @@ import javafx.stage.Stage;
 
 /*
  * @Author Marcelo Martinez
- * @Author 
- * @Author
+ * @Author Kyler Spencer
+ * @Author Josh Bertrand
  * 
  * This is a program that is designed to simulate a bank program
  * 
  * This class is for the GUI
  * Ver 1.0;
  */
-public class BankMenu extends Application{
-	//create all labels to be used: 
+public class BankMenu extends Application {
+	
+	List<Account> accountArray = new ArrayList<Account>();
+	List<Customer> customerArray = new ArrayList<Customer>();
+	
+	private 
+	//create all labels to be used:
+	
 		Label lblPaneTitle = new Label(), 
 				lblAccountNumber = new Label("Account Number"), 
 				lblaccountBalance = new Label("Account Balance"),
@@ -56,12 +70,11 @@ public class BankMenu extends Application{
 
     	Button btnSubmitChecking = new Button("Create Checking Account"), 
     			btnSubmitGold = new Button("Create Gold Account"), 
-    			btnSubmitPersonalCust = new Button("Create Customer"), 
-    			btnSubmitCommercialCust = new Button("Create Customer"),
+    			btnSubmitPersonalCust = new Button("Create Personal Customer"), 
+    			btnSubmitCommercialCust = new Button("Create Commercial Customer"),
     			btnSubmitRegular = new Button("Create Regular Account");
-    	CheckBox cbCommercial = new CheckBox("Commercial");
     	
-
+    	CheckBox cbCommercial = new CheckBox("Commercial");
     	
     	public static void main(String[] args) {
     		launch(args);
@@ -169,7 +182,7 @@ public class BankMenu extends Application{
 			    	centerPane.add(txtContactPerson, 1, 4);
 			    	centerPane.add(txtContactPhone, 1, 5);
 			    	
-			    	centerPane.add(btnSubmitPersonalCust, 1, 6);
+			    	centerPane.add(btnSubmitCommercialCust, 1, 6);
 			    	
 			    	mainPane.setCenter(centerPane);
 		    	}
@@ -287,6 +300,15 @@ public class BankMenu extends Application{
 		     */
 		    btnSubmitPersonalCust.setOnAction(actionEvent -> {
 		    	
+		    	String customerName = txtCustomerName.toString();
+		    	String customerEmail = txtEmail.toString();
+		    	String customerHomePhone = txtHomePhone.toString();
+		    	String customerWorkPhone = txtWorkPhone.toString();
+		    	
+		    	Customer newPersonal = new PersonalCustomer(UniqueIDFactory.generateUniqueID(), customerName, customerEmail, customerHomePhone, customerWorkPhone);
+				customerArray.add(newPersonal);
+				
+				//I'm not sure about how to get back to the main panel
 		    });
 		    
 		    btnSubmitChecking.setOnAction(actionEvent -> {
@@ -301,6 +323,6 @@ public class BankMenu extends Application{
 		    menuBar.getMenus().addAll(fileMenu, createMenu, transactionsMenu, maintenanceMenu, displayMenu);
 		    
 		    return mainPane;
-	 }
+}
 
 }
