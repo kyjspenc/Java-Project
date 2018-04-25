@@ -68,7 +68,8 @@ public class BankMenu extends Application implements Serializable{
 				lblWorkPhone = new Label("Work Phone"),
 				lblCreditRating = new Label("Credit Rating"),
 				lblContactPerson = new Label("Contact Person Name"),
-				lblContactPhone = new Label("Contact Person's Phone");
+				lblContactPhone = new Label("Contact Person's Phone"),
+				lblTransactionAmount = new Label("Transaction Amount");
 		
     	TextField txtAccountNumber = new TextField(), 
     			txtAccountBalance = new TextField(), 
@@ -79,13 +80,16 @@ public class BankMenu extends Application implements Serializable{
     			txtWorkPhone = new TextField(),
     			txtCreditRating = new TextField(),
     			txtContactPerson = new TextField(),
-    			txtContactPhone = new TextField();
+    			txtContactPhone = new TextField(),
+    			txtTransactionAmount = new TextField();
 
     	Button btnSubmitChecking = new Button("Create Checking Account"), 
     			btnSubmitGold = new Button("Create Gold Account"), 
     			btnSubmitPersonalCust = new Button("Create Personal Customer"), 
     			btnSubmitCommercialCust = new Button("Create Commercial Customer"),
     			btnSubmitRegular = new Button("Create Regular Account"), 
+    			btnDeposit = new Button("Deposit into Account"),
+    			btnWithdraw = new Button("Withdraw from Account"),
     			btnExit = new Button("Exit");
     	
     	CheckBox cbCommercial = new CheckBox("Commercial");
@@ -315,6 +319,39 @@ public class BankMenu extends Application implements Serializable{
 			    	mainPane.setCenter(centerPane);
 			    });
 			    
+			    depositMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	//element, column, row
+			    	lblPaneTitle.setText("Deposit");
+			    	
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(lblAccountNumber, 0,1);
+			    	centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(txtTransactionAmount, 1, 2);
+			    	centerPane.add(lblTransactionAmount, 0, 2);
+			    	centerPane.add(btnDeposit, 1, 4);
+			    	
+			    	mainPane.setCenter(centerPane);
+			    });
+			    
+			    withdrawalMenu.setOnAction(actionEvent ->{
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	//element, column, row
+			    	lblPaneTitle.setText("Withdraw");
+			    	
+			    	
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(lblAccountNumber, 0,1);
+			    	centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(txtTransactionAmount, 1, 2);
+			    	centerPane.add(lblTransactionAmount, 0, 2);
+			    	centerPane.add(btnWithdraw, 1, 4);
+			    	
+			    	mainPane.setCenter(centerPane);
+			    });
+			    
 			    allAccountsMenuItem.setOnAction(actionEvent -> {
 			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
@@ -328,7 +365,7 @@ public class BankMenu extends Application implements Serializable{
 			    	
 			    	for(Account a : accountArray) {
 			    		
-			    		textOutputArea.appendText(a.getCustomer().getName() + "\t" + a.getAccountNumber() + "\n");
+			    		textOutputArea.appendText(a.getCustomer().getName() + "\t\t\t" + a.getAccountNumber());
 			    		
 			    	}
 			    	
@@ -353,16 +390,21 @@ public class BankMenu extends Application implements Serializable{
 		     */
 		    btnSubmitPersonalCust.setOnAction(actionEvent -> {
 		    	
-		    	String customerName = txtCustomerName.toString();
-		    	String customerEmail = txtEmail.toString();
-		    	String customerHomePhone = txtHomePhone.toString();
-		    	String customerWorkPhone = txtWorkPhone.toString();
+		    	String customerName = txtName.getText();
+		    	String customerEmail = txtEmail.getText();
+		    	String customerHomePhone = txtHomePhone.getText();
+		    	String customerWorkPhone = txtWorkPhone.getText();
 		    	
 		    	Customer newPersonal = new PersonalCustomer(UniqueIDFactory.generateUniqueID(), customerName, customerEmail, customerHomePhone, customerWorkPhone);
 				customerArray.add(newPersonal);
 				System.out.println("Created");
 				
-				//Need to clear text boxes on exit
+				System.out.println(newPersonal);
+				
+				txtName.clear();
+				txtEmail.clear();
+				txtHomePhone.clear();
+				txtWorkPhone.clear();
 				
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
@@ -391,23 +433,28 @@ public class BankMenu extends Application implements Serializable{
 		    
 		    btnSubmitChecking.setOnAction(actionEvent -> {
 		    	Date newDate = new Date();
-//		    	double startingBalance = Double.parseDouble(txtAccountBalance.toString());
 		    	double startingBalance = Double.parseDouble(txtAccountBalance.getText());
 		    	
-		    	String customerInput = txtCustomerName.toString();
+		    	String customerInput = txtCustomerName.getText();
+		    	boolean customerSelected = false;
 		    	Customer customer = null;
 		    	
 		    	for(Customer c : customerArray) {
+		    		
+		    		System.out.println(c);
 					if(c.getName().equals(customerInput)) {
 						customer = c;
-						//customerSelected = true;
+						customerSelected = true;
 					}
 				}
 		    	
-		    	Account chkAcct = new CheckingAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
-				accountArray.add(chkAcct);
-				System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
-				
+		    	if(customerSelected) {
+			    	Account chkAcct = new CheckingAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
+					accountArray.add(chkAcct);
+					System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
+		    	}else
+		    		System.out.println("Customer could not be found");
+		    	
 				txtCustomerName.clear();
 				txtAccountBalance.clear();
 				
@@ -466,6 +513,14 @@ public class BankMenu extends Application implements Serializable{
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
 		    });
+		    
+		    btnDeposit.setOnAction(actionEvent -> {
+		    	
+		    });
+		    
+//		    btnWithraw.setOnAction(actionEvent -> {
+		    	
+//		    });
 		    
 		    btnExit.setOnAction(actionEvent -> {
 		    	
