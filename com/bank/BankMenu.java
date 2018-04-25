@@ -92,11 +92,15 @@ public class BankMenu extends Application implements Serializable{
     			btnSubmitRegular = new Button("Create Regular Account"), 
     			btnDeposit = new Button("Deposit into Account"),
     			btnWithdraw = new Button("Withdraw from Account"),
+    			btnApplyEOM = new Button("Apply EOM Updates"),
+    			btnSearch = new Button("Search for Account"),
+    			btnRemove = new Button("Remove an Account"),
     			btnExit = new Button("Exit");
     	
     	CheckBox cbCommercial = new CheckBox("Commercial");
     	
     	TextArea textOutputArea = new TextArea();
+    	TextArea textMainOutputArea = new TextArea();
     	
     	public static void main(String[] args) {
     		launch(args);
@@ -121,7 +125,7 @@ public class BankMenu extends Application implements Serializable{
 		 Stage popUpWin = new Stage();
 		 Scene popUp = new Scene(getPopUpPane(), 250, 150, Color.WHITE);
 		 
-		 popUpWin.setTitle("Notification");
+		 popUpWin.setTitle("Success!");
 		 popUpWin.setScene(popUp);
 		 popUpWin.show();
 	 }
@@ -218,6 +222,7 @@ public class BankMenu extends Application implements Serializable{
 		     *********************************/
 		    cbCommercial.setOnAction(actionEvent -> {
 		    	if(cbCommercial.isSelected()) {
+		    		mainPane.setCenter(null);
 				    centerPane.getChildren().clear();
 			    		
 			    	lblPaneTitle.setText("Enter Customer Information: ");
@@ -241,6 +246,7 @@ public class BankMenu extends Application implements Serializable{
 			    	mainPane.setCenter(centerPane);
 		    	}
 		    	else {
+			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 		    		
 		    		lblPaneTitle.setText("Enter Customer Information: ");
@@ -264,6 +270,7 @@ public class BankMenu extends Application implements Serializable{
 		    });
 		    
 		    customerMenu.setOnAction(actionEvent -> {   	
+		    	mainPane.setCenter(null);
 		    	centerPane.getChildren().clear();
 	    		
 	    		lblPaneTitle.setText("Enter Customer Information: ");
@@ -287,61 +294,65 @@ public class BankMenu extends Application implements Serializable{
 		    });
 		    //if(!customerArray.isEmpty()) {
 			    checkingMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Enter Checking Account Info: ");
 			    	centerPane.add(lblPaneTitle, 0, 0);
 	
-			    	centerPane.add(lblaccountBalance, 0, 1);
-			    	centerPane.add(lblCustomerName, 0, 2);
+			    	//centerPane.add(lblAccountNumber, 0, 1);
+			    	centerPane.add(lblaccountBalance, 0, 2);
+			    	centerPane.add(lblCustomerName, 0, 3);
 			    	
-			    	centerPane.add(txtAccountBalance, 1, 1);
-			    	centerPane.add(txtCustomerName, 1, 2);
+			    	//centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(txtAccountBalance, 1, 2);
+			    	centerPane.add(txtCustomerName, 1, 3);
 			    	
-		    		centerPane.add(btnSubmitChecking, 1, 3);
-
-			    	btnSubmitChecking.setVisible(false);
-			    	if (!(txtAccountBalance.getText().equals("") && txtCustomerName.getText().equals(""))) {
-			    		btnSubmitChecking.setVisible(true);
-			    	}
+			    	centerPane.add(btnSubmitChecking, 1, 4);
+			    	
 			    	mainPane.setCenter(centerPane);
 			    });
-			    
 			   
 			    goldMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Enter Gold Account Information: ");
 			    	centerPane.add(lblPaneTitle, 0, 0);
-
-			    	centerPane.add(lblaccountBalance, 0, 1);
-			    	centerPane.add(lblCustomerName, 0, 2);
+			    	//centerPane.add(lblAccountNumber, 0, 1);
+			    	centerPane.add(lblaccountBalance, 0, 2);
+			    	centerPane.add(lblCustomerName, 0, 3);
 			    	
-			    	centerPane.add(txtAccountBalance, 1, 1);
-			    	centerPane.add(txtCustomerName, 1, 2);
+			    	//centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(txtAccountBalance, 1, 2);
+			    	centerPane.add(txtCustomerName, 1, 3);
 			    	
-			    	centerPane.add(btnSubmitGold, 1, 3);
+			    	centerPane.add(btnSubmitGold, 1, 4);
 			    	
 			    	mainPane.setCenter(centerPane);
 			    });
 			    
 			    regularMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Enter Regular Account Information: ");
 			    	centerPane.add(lblPaneTitle, 0, 0);
-			    	centerPane.add(lblaccountBalance, 0, 1);
-			    	centerPane.add(lblCustomerName, 0, 2);
+			    	//centerPane.add(lblAccountNumber, 0, 1);
+			    	centerPane.add(lblaccountBalance, 0, 2);
+			    	centerPane.add(lblCustomerName, 0, 3);
 			    	
-			    	centerPane.add(txtAccountBalance, 1, 1);
-			    	centerPane.add(txtCustomerName, 1, 2);
+			    	//centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(txtAccountBalance, 1, 2);
+			    	centerPane.add(txtCustomerName, 1, 3);
 			    	
-			    	centerPane.add(btnSubmitRegular, 1, 3);
+			    	centerPane.add(btnSubmitRegular, 1, 4);
 			    	
 			    	mainPane.setCenter(centerPane);
 			    });
 			    
 			    depositMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	//element, column, row
 			    	lblPaneTitle.setText("Deposit");
@@ -351,28 +362,71 @@ public class BankMenu extends Application implements Serializable{
 			    	centerPane.add(txtAccountNumber, 1, 1);
 			    	centerPane.add(txtTransactionAmount, 1, 2);
 			    	centerPane.add(lblTransactionAmount, 0, 2);
-			    	centerPane.add(btnDeposit, 1, 4);
+			    	centerPane.add(btnDeposit, 1, 3);
+			    	centerPane.add(btnExit, 3, 4);
 			    	
 			    	mainPane.setCenter(centerPane);
 			    });
 			    
 			    withdrawalMenu.setOnAction(actionEvent ->{
+			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	//element, column, row
 			    	lblPaneTitle.setText("Withdraw");
-			    	
 			    	
 			    	centerPane.add(lblPaneTitle, 0, 0);
 			    	centerPane.add(lblAccountNumber, 0,1);
 			    	centerPane.add(txtAccountNumber, 1, 1);
 			    	centerPane.add(txtTransactionAmount, 1, 2);
 			    	centerPane.add(lblTransactionAmount, 0, 2);
-			    	centerPane.add(btnWithdraw, 1, 4);
+			    	centerPane.add(btnWithdraw, 1, 3);
+			    	centerPane.add(btnExit, 3, 4);
 			    	
 			    	mainPane.setCenter(centerPane);
 			    });
 			    
+			    eomMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	
+			    	centerPane.add(btnApplyEOM, 0, 0);
+			    	centerPane.add(btnExit, 0, 1);
+			    	
+			    	mainPane.setCenter(centerPane);
+			    });
+			    
+			    removeMenuItem.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	
+			    	lblPaneTitle.setText("Remove An Account");
+			    	//element, column, row
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(lblAccountNumber, 0,1);
+			    	centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(btnRemove, 1, 2);
+			    	
+			    	mainPane.setCenter(centerPane);
+			    });
+			    
+			    displayMenu.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
+			    	centerPane.getChildren().clear();
+			    	
+			    	lblPaneTitle.setText("Display An Account");
+			    	//element, column, row
+			    	centerPane.add(lblPaneTitle, 0, 0);
+			    	centerPane.add(lblAccountNumber, 0,1);
+			    	centerPane.add(txtAccountNumber, 1, 1);
+			    	centerPane.add(btnSearch, 1, 2);
+			    	textMainOutputArea.setEditable(false);
+			    	centerPane.add(textMainOutputArea, 0, 3);
+			    	centerPane.add(btnExit, 1, 4);
+			    	
+			    	mainPane.setCenter(centerPane);
+			    });
 			    allAccountsMenuItem.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Display All Accounts");
@@ -392,12 +446,69 @@ public class BankMenu extends Application implements Serializable{
 			    });
 			    
 			    bankStatsMenuItem.setOnAction(actionEvent -> {
+			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Display Bank Statistics");
 			    	centerPane.add(lblPaneTitle, 0, 0);
 			    	centerPane.add(textOutputArea, 0, 1);
 			    	centerPane.add(btnExit, 1, 2);
+			    	
+			    	double totalBalance = 0;
+					double totalCheckingBalance = 0;
+					double totalGoldBalance = 0;
+					double totalRegularBalance = 0;
+					double averageAcctBalance = 0;
+					
+					int checkingAcctCounter = 0;
+					int goldAcctCounter = 0;
+					int regularAcctCounter = 0;
+					int emptyAcctCounter = 0;
+					double largestAccountBalance = 0;
+					String largestAccount = "";
+					
+					
+					if(!accountArray.isEmpty()) {
+						System.out.println("\nTotal balance of all accounts: ");
+						
+						for(Account a : accountArray) {
+							totalBalance += a.getAccountBalance();
+							if(a.getAccountBalance() > largestAccountBalance) {
+								largestAccountBalance = a.getAccountBalance();
+								largestAccount = a.getCustomer().getName();
+							}
+						}
+						
+							averageAcctBalance = totalBalance / accountArray.size();
+						
+						for(Account a : accountArray) {
+							if(a instanceof CheckingAccount) {
+								totalCheckingBalance += a.getAccountBalance();
+								checkingAcctCounter++;
+							} else if (a instanceof GoldAccount) {
+								totalGoldBalance += a.getAccountBalance();
+								goldAcctCounter++;
+							} else if (a instanceof RegularAccount) {
+								totalRegularBalance += a.getAccountBalance();
+								regularAcctCounter++;
+							}
+							
+							if(a.getAccountBalance() == 0) {
+								emptyAcctCounter++;
+							}
+							
+						}
+						textOutputArea.appendText("\tThe total balance of all accounts in the bank is: " + totalBalance + "\n");
+						textOutputArea.appendText("\tThe average account balance is $" + averageAcctBalance + " of all accounts.\n");
+						textOutputArea.appendText("\tThe total balance of all Checking accounts in the bank is: $" + totalCheckingBalance + "\n");
+						textOutputArea.appendText("\tThe total balance of all Gold accounts in the bank is: $" + totalGoldBalance + "\n");
+						textOutputArea.appendText("\tThe total balance of all Regular accounts in the bank is: $" + totalRegularBalance + "\n");
+						textOutputArea.appendText("\tThere is a total of: " + checkingAcctCounter + " checking account(s), " + goldAcctCounter + " gold account(s),\n\t\t and " + regularAcctCounter + " regular account(s) in the bank.\n");
+						textOutputArea.appendText("\tThere are a total of " + emptyAcctCounter + " empty accounts in the bank.\n");
+						textOutputArea.appendText("\tThe customer with the largest balance is: " + largestAccount + "\n");
+					}
+			    	
+			    	mainPane.setCenter(centerPane);
 			    });
 		    //}
 		    /*
@@ -430,11 +541,11 @@ public class BankMenu extends Application implements Serializable{
 		    
 		    btnSubmitCommercialCust.setOnAction(actionEvent ->{
 		    	
-		    	String customerFullName = txtName.toString();
-		    	String customerEmail = txtEmail.toString();
-		    	int customerCreditRating = Integer.parseInt(txtCreditRating.toString());
-		    	String contactPerson = txtContactPerson.toString();
-		    	String contactPersonPhone = txtContactPhone.toString();
+		    	String customerFullName = txtName.getText();
+		    	String customerEmail = txtEmail.getText();
+		    	int customerCreditRating = Integer.parseInt(txtCreditRating.getText());
+		    	String contactPerson = txtContactPerson.getText();
+		    	String contactPersonPhone = txtContactPhone.getText();
 		    	
 		    	Customer newCommercial = new CommercialCustomer(UniqueIDFactory.generateUniqueID(), customerFullName, customerEmail, customerCreditRating, contactPerson, contactPersonPhone);
 				customerArray.add(newCommercial);
@@ -447,9 +558,6 @@ public class BankMenu extends Application implements Serializable{
 				
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
-				
-				lblNotification.setText("Your ID is: " + Long.toString(newCommercial.getCustomerId()));
-				showPopUp();
 		    });
 		    
 		    btnSubmitChecking.setOnAction(actionEvent -> {
@@ -472,13 +580,10 @@ public class BankMenu extends Application implements Serializable{
 		    	if(customerSelected) {
 			    	Account chkAcct = new CheckingAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
 					accountArray.add(chkAcct);
-					lblNotification.setText("Your accountNumber is: " + chkAcct.getAccountNumber());
-					showPopUp();
-		    	}else {
-		    		lblCreated.setText("Not Created!");
-		    		lblNotification.setText("Customer is not available!");
-		    		showPopUp();
-		    	}
+					System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
+		    	}else
+		    		System.out.println("Customer could not be found");
+		    	
 				txtCustomerName.clear();
 				txtAccountBalance.clear();
 				
@@ -540,15 +645,94 @@ public class BankMenu extends Application implements Serializable{
 		    
 		    btnDeposit.setOnAction(actionEvent -> {
 		    	
+		    	long accountNumberInput = Long.parseLong(txtAccountNumber.getText());
+		    	double depositAmount = Double.parseDouble(txtTransactionAmount.getText());
+		    	
+		    	for(Account a : accountArray) {
+					if(a.getAccountNumber() == accountNumberInput) {
+						a.deposit(depositAmount);
+						System.out.println("Success");
+					}
+		    	}
+		    	
+		    	txtAccountNumber.clear();
+		    	txtTransactionAmount.clear();
+		    	
+		    	centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
 		    });
 		    
-//		    btnWithraw.setOnAction(actionEvent -> {
+		    btnWithdraw.setOnAction(actionEvent -> {
+		    	long accountNumberInput = Long.parseLong(txtAccountNumber.getText());
+		    	double withdrawAmount = Double.parseDouble(txtTransactionAmount.getText());
 		    	
-//		    });
+		    	for(Account a : accountArray) {
+					if(a.getAccountNumber() == accountNumberInput) {
+						a.withdraw(withdrawAmount);
+						System.out.println("Success");
+					}
+		    	}
+		    	
+		    	txtAccountNumber.clear();
+		    	txtTransactionAmount.clear();
+		    	
+		    	centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
+  	        });
+		    
+		    btnSearch.setOnAction(actionEvent -> {
+		    	long accountNumberInput = Long.parseLong(txtAccountNumber.getText());
+				textMainOutputArea.setText("Customer Name\t\tAccount Number\t\tAccount Balance\n" );
+
+		    	
+		    	for(Account a : accountArray) {
+					if(a.getAccountNumber() == accountNumberInput) {
+						textMainOutputArea.appendText(a.getCustomer().getName() + "\t\t\t\t\t" + a.getAccountNumber() + "\t\t\t" + a.getAccountBalance());
+						
+					}
+		    	}
+		    });
+		    
+		    btnRemove.setOnAction(actionEvent -> {
+		    	long accountNumber;
+		    	
+		    	long accountNumberInput = Long.parseLong(txtAccountNumber.getText());
+		    	
+		    	for(int i = 0; i <= accountArray.size(); i++) {
+					
+					accountNumber = accountArray.get(i).getAccountNumber();
+					
+					if(accountNumber == accountNumberInput) {
+						accountArray.remove(i);
+						((ArrayList<Account>) accountArray).trimToSize();
+						System.out.println("Account " + accountNumberInput + " has been removed.");
+						
+					}
+				}
+
+		    });
+		    
+		    btnApplyEOM.setOnAction(actionEvent -> {
+		    	for(Account a: accountArray) {
+					if (a instanceof CheckingAccount) {
+						((CheckingAccount) a).deductFees();
+					} else if (a instanceof GoldAccount) {
+						((GoldAccount) a).calculateInterest();
+					} else if (a instanceof RegularAccount) {
+						((RegularAccount) a).calculateInterest();
+					}
+				}
+		    	
+		    	centerPane.getChildren().clear();
+				mainPane.setCenter(centerPane);
+		    	
+		    });
 		    
 		    btnExit.setOnAction(actionEvent -> {
 		    	
 		    	textOutputArea.clear();
+		    	textMainOutputArea.clear();
+		    	txtAccountNumber.clear();
 		    	
 		    	centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
