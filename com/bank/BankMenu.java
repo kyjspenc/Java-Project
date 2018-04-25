@@ -121,7 +121,7 @@ public class BankMenu extends Application implements Serializable{
 		 Stage popUpWin = new Stage();
 		 Scene popUp = new Scene(getPopUpPane(), 250, 150, Color.WHITE);
 		 
-		 popUpWin.setTitle("Success!");
+		 popUpWin.setTitle("Notification");
 		 popUpWin.setScene(popUp);
 		 popUpWin.show();
 	 }
@@ -218,7 +218,6 @@ public class BankMenu extends Application implements Serializable{
 		     *********************************/
 		    cbCommercial.setOnAction(actionEvent -> {
 		    	if(cbCommercial.isSelected()) {
-		    		mainPane.setCenter(null);
 				    centerPane.getChildren().clear();
 			    		
 			    	lblPaneTitle.setText("Enter Customer Information: ");
@@ -242,7 +241,6 @@ public class BankMenu extends Application implements Serializable{
 			    	mainPane.setCenter(centerPane);
 		    	}
 		    	else {
-			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 		    		
 		    		lblPaneTitle.setText("Enter Customer Information: ");
@@ -266,7 +264,6 @@ public class BankMenu extends Application implements Serializable{
 		    });
 		    
 		    customerMenu.setOnAction(actionEvent -> {   	
-		    	mainPane.setCenter(null);
 		    	centerPane.getChildren().clear();
 	    		
 	    		lblPaneTitle.setText("Enter Customer Information: ");
@@ -290,65 +287,61 @@ public class BankMenu extends Application implements Serializable{
 		    });
 		    //if(!customerArray.isEmpty()) {
 			    checkingMenu.setOnAction(actionEvent -> {
-			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Enter Checking Account Info: ");
 			    	centerPane.add(lblPaneTitle, 0, 0);
 	
-			    	//centerPane.add(lblAccountNumber, 0, 1);
-			    	centerPane.add(lblaccountBalance, 0, 2);
-			    	centerPane.add(lblCustomerName, 0, 3);
+			    	centerPane.add(lblaccountBalance, 0, 1);
+			    	centerPane.add(lblCustomerName, 0, 2);
 			    	
-			    	//centerPane.add(txtAccountNumber, 1, 1);
-			    	centerPane.add(txtAccountBalance, 1, 2);
-			    	centerPane.add(txtCustomerName, 1, 3);
+			    	centerPane.add(txtAccountBalance, 1, 1);
+			    	centerPane.add(txtCustomerName, 1, 2);
 			    	
-			    	centerPane.add(btnSubmitChecking, 1, 4);
-			    	
+		    		centerPane.add(btnSubmitChecking, 1, 3);
+
+			    	btnSubmitChecking.setVisible(false);
+			    	if (!(txtAccountBalance.getText().equals("") && txtCustomerName.getText().equals(""))) {
+			    		btnSubmitChecking.setVisible(true);
+			    	}
 			    	mainPane.setCenter(centerPane);
 			    });
+			    
 			   
 			    goldMenu.setOnAction(actionEvent -> {
-			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Enter Gold Account Information: ");
 			    	centerPane.add(lblPaneTitle, 0, 0);
-			    	//centerPane.add(lblAccountNumber, 0, 1);
-			    	centerPane.add(lblaccountBalance, 0, 2);
-			    	centerPane.add(lblCustomerName, 0, 3);
+
+			    	centerPane.add(lblaccountBalance, 0, 1);
+			    	centerPane.add(lblCustomerName, 0, 2);
 			    	
-			    	//centerPane.add(txtAccountNumber, 1, 1);
-			    	centerPane.add(txtAccountBalance, 1, 2);
-			    	centerPane.add(txtCustomerName, 1, 3);
+			    	centerPane.add(txtAccountBalance, 1, 1);
+			    	centerPane.add(txtCustomerName, 1, 2);
 			    	
-			    	centerPane.add(btnSubmitGold, 1, 4);
+			    	centerPane.add(btnSubmitGold, 1, 3);
 			    	
 			    	mainPane.setCenter(centerPane);
 			    });
 			    
 			    regularMenu.setOnAction(actionEvent -> {
-			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Enter Regular Account Information: ");
 			    	centerPane.add(lblPaneTitle, 0, 0);
-			    	//centerPane.add(lblAccountNumber, 0, 1);
-			    	centerPane.add(lblaccountBalance, 0, 2);
-			    	centerPane.add(lblCustomerName, 0, 3);
+			    	centerPane.add(lblaccountBalance, 0, 1);
+			    	centerPane.add(lblCustomerName, 0, 2);
 			    	
-			    	//centerPane.add(txtAccountNumber, 1, 1);
-			    	centerPane.add(txtAccountBalance, 1, 2);
-			    	centerPane.add(txtCustomerName, 1, 3);
+			    	centerPane.add(txtAccountBalance, 1, 1);
+			    	centerPane.add(txtCustomerName, 1, 2);
 			    	
-			    	centerPane.add(btnSubmitRegular, 1, 4);
+			    	centerPane.add(btnSubmitRegular, 1, 3);
 			    	
 			    	mainPane.setCenter(centerPane);
 			    });
 			    
 			    depositMenu.setOnAction(actionEvent -> {
-			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	//element, column, row
 			    	lblPaneTitle.setText("Deposit");
@@ -364,7 +357,6 @@ public class BankMenu extends Application implements Serializable{
 			    });
 			    
 			    withdrawalMenu.setOnAction(actionEvent ->{
-			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	//element, column, row
 			    	lblPaneTitle.setText("Withdraw");
@@ -381,7 +373,6 @@ public class BankMenu extends Application implements Serializable{
 			    });
 			    
 			    allAccountsMenuItem.setOnAction(actionEvent -> {
-			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Display All Accounts");
@@ -401,7 +392,6 @@ public class BankMenu extends Application implements Serializable{
 			    });
 			    
 			    bankStatsMenuItem.setOnAction(actionEvent -> {
-			    	mainPane.setCenter(null);
 			    	centerPane.getChildren().clear();
 			    	
 			    	lblPaneTitle.setText("Display Bank Statistics");
@@ -440,11 +430,11 @@ public class BankMenu extends Application implements Serializable{
 		    
 		    btnSubmitCommercialCust.setOnAction(actionEvent ->{
 		    	
-		    	String customerFullName = txtName.getText();
-		    	String customerEmail = txtEmail.getText();
-		    	int customerCreditRating = Integer.parseInt(txtCreditRating.getText());
-		    	String contactPerson = txtContactPerson.getText();
-		    	String contactPersonPhone = txtContactPhone.getText();
+		    	String customerFullName = txtName.toString();
+		    	String customerEmail = txtEmail.toString();
+		    	int customerCreditRating = Integer.parseInt(txtCreditRating.toString());
+		    	String contactPerson = txtContactPerson.toString();
+		    	String contactPersonPhone = txtContactPhone.toString();
 		    	
 		    	Customer newCommercial = new CommercialCustomer(UniqueIDFactory.generateUniqueID(), customerFullName, customerEmail, customerCreditRating, contactPerson, contactPersonPhone);
 				customerArray.add(newCommercial);
@@ -457,6 +447,9 @@ public class BankMenu extends Application implements Serializable{
 				
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
+				
+				lblNotification.setText("Your ID is: " + Long.toString(newCommercial.getCustomerId()));
+				showPopUp();
 		    });
 		    
 		    btnSubmitChecking.setOnAction(actionEvent -> {
@@ -479,10 +472,13 @@ public class BankMenu extends Application implements Serializable{
 		    	if(customerSelected) {
 			    	Account chkAcct = new CheckingAccount(UniqueIDFactory.generateUniqueID(),startingBalance, customer, newDate);
 					accountArray.add(chkAcct);
-					System.out.println("Checking account has been successfully created. Your accountNumber is: " + chkAcct.getAccountNumber() + "\n");
-		    	}else
-		    		System.out.println("Customer could not be found");
-		    	
+					lblNotification.setText("Your accountNumber is: " + chkAcct.getAccountNumber());
+					showPopUp();
+		    	}else {
+		    		lblCreated.setText("Not Created!");
+		    		lblNotification.setText("Customer is not available!");
+		    		showPopUp();
+		    	}
 				txtCustomerName.clear();
 				txtAccountBalance.clear();
 				
