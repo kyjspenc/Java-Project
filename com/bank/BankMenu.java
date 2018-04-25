@@ -69,7 +69,9 @@ public class BankMenu extends Application implements Serializable{
 				lblCreditRating = new Label("Credit Rating"),
 				lblContactPerson = new Label("Contact Person Name"),
 				lblContactPhone = new Label("Contact Person's Phone"),
-				lblTransactionAmount = new Label("Transaction Amount");
+				lblTransactionAmount = new Label("Transaction Amount"),
+				lblCreated = new Label("Successfully Created!"),
+				lblNotification = new Label("");
 		
     	TextField txtAccountNumber = new TextField(), 
     			txtAccountBalance = new TextField(), 
@@ -113,7 +115,31 @@ public class BankMenu extends Application implements Serializable{
 	    primaryStage.setTitle("Bank");
 	    primaryStage.setScene(scene);
 	    primaryStage.show();
-	  }
+	 }
+	 
+	 protected void showPopUp() {
+		 Stage popUpWin = new Stage();
+		 Scene popUp = new Scene(getPopUpPane(), 250, 150, Color.WHITE);
+		 
+		 popUpWin.setTitle("Success!");
+		 popUpWin.setScene(popUp);
+		 popUpWin.show();
+	 }
+	 
+	 protected BorderPane getPopUpPane() {
+		 BorderPane popUpPane = new BorderPane();
+		 GridPane popUpCenter = new GridPane();
+		 popUpCenter.setPadding(new Insets(11,12,13,14));
+		  popUpCenter.setHgap(5);
+		  popUpCenter.setVgap(5);
+		  popUpCenter.setAlignment(Pos.CENTER);
+		 
+		  popUpCenter.addColumn(2, lblCreated, lblNotification);
+		  popUpPane.setCenter(popUpCenter);
+		 return popUpPane;
+	 }
+	 
+	 
 	 
 	 protected BorderPane getPane() {
 		 BorderPane mainPane = new BorderPane();
@@ -126,6 +152,8 @@ public class BankMenu extends Application implements Serializable{
 		  centerPane.setHgap(5);
 		  centerPane.setVgap(5);
 		  centerPane.setAlignment(Pos.CENTER);
+		  
+		  
 		  
 		  
 		// File Menu - Exit
@@ -397,10 +425,7 @@ public class BankMenu extends Application implements Serializable{
 		    	
 		    	Customer newPersonal = new PersonalCustomer(UniqueIDFactory.generateUniqueID(), customerName, customerEmail, customerHomePhone, customerWorkPhone);
 				customerArray.add(newPersonal);
-				System.out.println("Created");
-				
-				System.out.println(newPersonal);
-				
+								
 				txtName.clear();
 				txtEmail.clear();
 				txtHomePhone.clear();
@@ -408,6 +433,9 @@ public class BankMenu extends Application implements Serializable{
 				
 				centerPane.getChildren().clear();
 				mainPane.setCenter(centerPane);
+				
+				lblNotification.setText("Your ID is: " + Long.toString(newPersonal.getCustomerId()));
+				showPopUp();
 		    });
 		    
 		    btnSubmitCommercialCust.setOnAction(actionEvent ->{
