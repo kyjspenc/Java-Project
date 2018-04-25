@@ -440,11 +440,11 @@ public class BankMenu extends Application implements Serializable{
 		    
 		    btnSubmitCommercialCust.setOnAction(actionEvent ->{
 		    	
-		    	String customerFullName = txtName.toString();
-		    	String customerEmail = txtEmail.toString();
-		    	int customerCreditRating = Integer.parseInt(txtCreditRating.toString());
-		    	String contactPerson = txtContactPerson.toString();
-		    	String contactPersonPhone = txtContactPhone.toString();
+		    	String customerFullName = txtName.getText();
+		    	String customerEmail = txtEmail.getText();
+		    	int customerCreditRating = Integer.parseInt(txtCreditRating.getText());
+		    	String contactPerson = txtContactPerson.getText();
+		    	String contactPersonPhone = txtContactPhone.getText();
 		    	
 		    	Customer newCommercial = new CommercialCustomer(UniqueIDFactory.generateUniqueID(), customerFullName, customerEmail, customerCreditRating, contactPerson, contactPersonPhone);
 				customerArray.add(newCommercial);
